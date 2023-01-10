@@ -35,8 +35,9 @@ let startRowBase = Math.floor(Math.random() * rows + 1);
 let wave = 1;
 
 // User variables
-let roundTime = 59;
-let cash = 100;
+let waveTime = 30;
+let roundTime = 30;
+let cash = 300;
 let isPlacingTower = false;
 
 let selectedTowerRange;
@@ -144,6 +145,40 @@ let towersPositions = [
 	},
 ];
 
+class Enemy {
+	constructor() {
+		this.x = 0 + cellSize / 2;
+		this.y = startRowEnemies * cellSize - cellSize / 2;
+		this.speed = 1;
+	}
+
+	draw() {
+		ctx.strokeStyle = 'black';
+		ctx.lineWidth = 5;
+		ctx.fillStyle = 'red';
+		ctx.beginPath();
+		ctx.arc(this.x, this.y, 6, 0, 2 * Math.PI);
+		ctx.stroke();
+		ctx.fill();
+	}
+
+	update() {
+		let target = { x: cols * cellSize + cellSize / 2, y: startRowBase };
+		let dx = target.x - this.x;
+		let dy = target.y - this.y;
+
+		let distance = Math.sqrt(dx * dx + dy * dy);
+		let moves = distance / this.speed;
+		let xUnits = (target.x - this.x) / moves;
+		let yUnits = (target.y - this.y) / moves;
+
+		this.x += xUnits;
+		this.y += yUnits;
+	}
+}
+
+let enemy1 = new Enemy();
+
 function play() {
 	if (!gameStarted) {
 		mainMenu.style.display = 'none';
@@ -157,6 +192,8 @@ function play() {
 			timeEl.innerText = roundTime;
 			roundTime -= 1;
 		}, 1000);
+
+		enemy1.draw();
 
 		animate();
 	}
@@ -179,6 +216,14 @@ function tick() {
 	drawTowers();
 	drawGrid();
 
+	if (roundTime === 0) {
+		wave += 1;
+		waveTime += 5;
+		roundTime = waveTime;
+		timeEl.style.color = '#f4f4f4';
+		updateTextFields();
+	}
+
 	if (selectedTower !== null && selectedTower !== undefined) {
 		console.log(selectedTower);
 		towerNameEl.innerText = selectedTower.name;
@@ -198,6 +243,9 @@ function tick() {
 			drawPlacementCircle(tower);
 		});
 	}
+
+	enemy1.update();
+	enemy1.draw();
 }
 
 function handlePause() {

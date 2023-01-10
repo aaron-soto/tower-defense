@@ -21,6 +21,7 @@ function updateTextFields() {
 
 	cashEl.innerText = cash;
 	waveEl.innerText = wave;
+	timeEl.innerText = roundTime;
 	towerList.forEach((tower) => {
 		document.getElementById(tower.costEl).innerText = tower.cost;
 	});
@@ -106,7 +107,19 @@ function drawTowers() {
 		.filter((tower) => tower.type !== 'base')
 		.forEach((tower) => {
 			ctx.save();
-			ctx.fillStyle = '#41a6f6';
+			if (tower.name === 'sniper') {
+				ctx.fillStyle = '#257179';
+			} else if (tower.name === 'cannon') {
+				ctx.fillStyle = '#333c57';
+			} else if (tower.name === 'missile') {
+				ctx.fillStyle = '#566c86';
+			} else if (tower.name === 'gatlin') {
+				ctx.fillStyle = '#ef7d57';
+			} else if (tower.name === 'tesla') {
+				ctx.fillStyle = '#5d275d';
+			} else {
+				ctx.fillStyle = '#41a6f6';
+			}
 			ctx.fillRect(
 				(tower.x - 1) * cellSize,
 				(tower.y - 1) * cellSize,
