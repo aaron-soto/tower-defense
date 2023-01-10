@@ -37,8 +37,8 @@ let wave = 1;
 
 // User variables
 let health = 100;
-let waveTime = 30;
-let roundTime = 30;
+let waveTime = 50;
+let roundTime = 50;
 let cash = 300;
 let isPlacingTower = false;
 let enemyCount = 15;
@@ -250,6 +250,7 @@ function tick() {
 		waveTime += 5;
 		roundTime = waveTime;
 		timeEl.style.color = '#f4f4f4';
+		spawnEnemies();
 		updateTextFields();
 	}
 
