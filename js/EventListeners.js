@@ -22,50 +22,48 @@ towerList.forEach((tower) => {
 // on click
 canvas.addEventListener('click', (e) => {
 	let isOnBase = false;
-	let tower;
+	let tempTower;
 	if (isPlacingTower) {
-		towersPositions.forEach((t) => {
+		game.towers.forEach((t) => {
 			if (mouse.cellPosition.x === t.x && mouse.cellPosition.y === t.y) {
 				isOnBase = true;
 			}
-			tower = {
-				x: mouse.cellPosition.x,
-				y: mouse.cellPosition.y,
-				upgradeLevel: 0,
-				name: selectedPlacingTower.name,
-				range: selectedPlacingTower.range,
-			};
-			tower['type'] = selectedPlacingTower.type;
+			tempTower = new Tower(
+				mouse.cellPosition.x,
+				mouse.cellPosition.y,
+				'tower',
+				selectedPlacingTower.name,
+				selectedPlacingTower.range
+			);
 		});
 		if (!isOnBase) {
-			console.log('test');
 			cash -= selectedPlacingTower?.cost;
 			updateTextFields();
-			towersPositions.push(tower);
-			selectedTower = tower;
+			game.towers.push(tempTower);
+			selectedTower = tempTower;
 			isPlacingTower = false;
 		}
 	} else {
-		let clickedTower = false;
-		towersPositions
-			.filter((t) => t.type !== 'base')
+		let didClickTower = false;
+		game.towers
+			.filter((t) => t.type !== TowerTypes.Base)
 			.forEach((t) => {
 				if (mouse.cellPosition.x === t.x && mouse.cellPosition.y === t.y) {
-					clickedTower = true;
+					didClickTower = true;
 					selectedTower = t;
+					console.log(t.id);
 				}
 			});
 
-		if (!clickedTower) {
+		if (!didClickTower) {
 			selectedTower = null;
 		}
+
 		isPlacingTower = false;
 	}
 
 	e.stopPropagation();
 	e.preventDefault();
-
-	// TODO: select placed towers
 });
 
 canvas.addEventListener('mousemove', (evt) => {

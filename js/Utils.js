@@ -35,23 +35,6 @@ function updateTextFields() {
 	});
 }
 
-function drawGrid() {
-	ctx.save();
-	ctx.beginPath();
-	ctx.lineWidth = 0.25;
-	ctx.strokeStyle = '#b0b0b0';
-	for (let x = 0; x < cols; x += 1) {
-		ctx.moveTo(x * cellSize + 0.5, 0);
-		ctx.lineTo(x * cellSize + 0.5, canvas.height);
-	}
-	for (let y = 0; y < rows; y += 1) {
-		ctx.moveTo(0, y * cellSize + 0.5);
-		ctx.lineTo(canvas.width, y * cellSize + 0.5);
-	}
-	ctx.stroke();
-	ctx.restore();
-}
-
 function drawPlacementCircle(tower) {
 	ctx.save();
 	if (tower.x === mouse.cellPosition.x && tower.y === mouse.cellPosition.y) {
@@ -100,51 +83,4 @@ function resetFrame() {
 	ctx.fillStyle = '#f1f1f1';
 	ctx.fillRect(0, 0, canvas.width, canvas.height);
 	ctx.restore();
-}
-
-function drawTowers() {
-	towersPositions
-		.filter((tower) => tower.type !== 'base')
-		.forEach((tower) => {
-			ctx.save();
-			if (tower.name === 'sniper') {
-				ctx.fillStyle = '#257179';
-			} else if (tower.name === 'cannon') {
-				ctx.fillStyle = '#333c57';
-			} else if (tower.name === 'missile') {
-				ctx.fillStyle = '#566c86';
-			} else if (tower.name === 'gatlin') {
-				ctx.fillStyle = '#ef7d57';
-			} else if (tower.name === 'tesla') {
-				ctx.fillStyle = '#5d275d';
-			} else {
-				ctx.fillStyle = '#41a6f6';
-			}
-			ctx.fillRect(
-				(tower.x - 1) * cellSize,
-				(tower.y - 1) * cellSize,
-				cellSize,
-				cellSize
-			);
-			ctx.restore();
-
-			if (tower.x === selectedTower?.x && tower.y === selectedTower?.y) {
-				ctx.save();
-				ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
-				ctx.strokeStyle = 'black';
-				ctx.beginPath();
-				ctx.arc(
-					cellSize * (selectedTower.x - 1) + cellSize / 2,
-					cellSize * (selectedTower.y - 1) + cellSize / 2,
-					cellSize * selectedPlacingTower?.range, // Range
-					0,
-					2 * Math.PI
-				);
-				ctx.strokeStyle = '#94b0c2';
-				ctx.lineWidth = 3;
-				ctx.stroke();
-				ctx.fill();
-				ctx.restore();
-			}
-		});
 }
