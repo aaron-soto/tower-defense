@@ -39,6 +39,7 @@ let waveTime = 30;
 let roundTime = 30;
 let cash = 300;
 let isPlacingTower = false;
+let enemyCount = 15;
 
 let selectedTowerRange;
 let selectedTowerCost;
@@ -149,13 +150,13 @@ class Enemy {
 	constructor() {
 		this.x = 0 + cellSize / 2;
 		this.y = startRowEnemies * cellSize - cellSize / 2;
-		this.speed = 3;
+		this.speed = 0.75;
 	}
 
 	draw() {
-		ctx.strokeStyle = 'black';
+		ctx.strokeStyle = '#333c57';
 		ctx.lineWidth = 5;
-		ctx.fillStyle = 'red';
+		ctx.fillStyle = '#b13e53';
 		ctx.beginPath();
 		ctx.arc(this.x, this.y, 6, 0, 2 * Math.PI);
 		ctx.stroke();
@@ -180,6 +181,18 @@ class Enemy {
 }
 
 let enemy1 = new Enemy();
+let enemies = [];
+
+function spawnEnemies() {
+	let enemyNum = 0;
+	var t = setInterval((e) => {
+		if (enemyNum <= enemyCount) {
+			enemies.push(new Enemy());
+			enemyNum++;
+			console.log(enemies);
+		}
+	}, 2000);
+}
 
 function play() {
 	if (!gameStarted) {
@@ -195,7 +208,7 @@ function play() {
 			roundTime -= 1;
 		}, 1000);
 
-		enemy1.draw();
+		spawnEnemies();
 
 		animate();
 	}
@@ -246,8 +259,12 @@ function tick() {
 		});
 	}
 
-	enemy1.update();
-	enemy1.draw();
+	enemies.forEach((enemy) => {
+		enemy.update();
+	});
+	enemies.forEach((enemy) => {
+		enemy.draw();
+	});
 }
 
 function handlePause() {
