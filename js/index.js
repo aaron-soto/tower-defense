@@ -149,7 +149,7 @@ class Enemy {
 	constructor() {
 		this.x = 0 + cellSize / 2;
 		this.y = startRowEnemies * cellSize - cellSize / 2;
-		this.speed = 1;
+		this.speed = 3;
 	}
 
 	draw() {
@@ -163,17 +163,19 @@ class Enemy {
 	}
 
 	update() {
-		let target = { x: cols * cellSize + cellSize / 2, y: startRowBase };
-		let dx = target.x - this.x;
-		let dy = target.y - this.y;
+		let target = {
+			x: cols * cellSize - cellSize / 2,
+			y: startRowBase * cellSize - cellSize / 2,
+		};
+		const angle = Math.atan2(target.y - this.y, target.x - this.x);
 
-		let distance = Math.sqrt(dx * dx + dy * dy);
-		let moves = distance / this.speed;
-		let xUnits = (target.x - this.x) / moves;
-		let yUnits = (target.y - this.y) / moves;
+		const velocity = {
+			x: Math.cos(angle) * this.speed,
+			y: Math.sin(angle) * this.speed,
+		};
 
-		this.x += xUnits;
-		this.y += yUnits;
+		this.x = this.x + velocity.x;
+		this.y = this.y + velocity.y;
 	}
 }
 
