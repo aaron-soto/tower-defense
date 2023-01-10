@@ -1,0 +1,303 @@
+@import url('https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css');
+
+:root {
+	--primary-black: #1a1c2c;
+	--primary-purple: #5d275d;
+	--primary-red: #b13e53;
+	--primary-orange: #ef7d57;
+	--primary-yellow: #ffcd75;
+	--primary-light-green: #a7f070;
+	--primary-green: #38b764;
+	--primary-dark-green: #257179;
+	--primary-dark-blue: #29366f;
+	--primary-navy-blue: #3b5dc9;
+	--primary-blue: #41a6f6;
+	--primary-light-blue: #73eff7;
+	--primary-white: #f4f4f4;
+	--primary-light-gray: #94b0c2;
+	--primary-gray: #566c86;
+	--primary-dark-gray: #333c57;
+}
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	-webkit-user-select: none; /* Safari */
+	-ms-user-select: none; /* IE 10 and IE 11 */
+	user-select: none; /* Standard syntax */
+}
+
+body {
+	background-color: #282828;
+	height: 100vh;
+	width: 100vw;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-family: 'Play', sans-serif;
+}
+
+canvas {
+	background-color: var(--primary-white);
+}
+
+.container {
+	position: relative;
+}
+
+button {
+	font-family: 'Play', sans-serif;
+}
+
+.tooltip {
+	position: relative;
+	display: inline-block;
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+	visibility: hidden;
+	width: 120px;
+	background-color: #00000083;
+	color: #f1f1f1;
+	text-align: center;
+	width: auto;
+	padding: 6px 0;
+	border-radius: 6px;
+	font-size: 1rem;
+	font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+		Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+	/* Position the tooltip text - see examples below! */
+	position: absolute;
+	z-index: 1;
+	width: 120px;
+	bottom: 100%;
+	left: 50%;
+	margin-left: -60px;
+}
+.tooltip .tooltiptext::after {
+	content: ' ';
+	position: absolute;
+	top: 100%; /* At the bottom of the tooltip */
+	left: 50%;
+	margin-left: -5px;
+	border-width: 5px;
+	border-style: solid;
+	border-color: #00000083 transparent transparent transparent;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+	visibility: visible;
+}
+
+/* ---------------------------------------- */
+/* Main Menu */
+/* ---------------------------------------- */
+#main-menu {
+	position: absolute;
+	width: 100%;
+	inset: 0;
+	background-color: var(--primary-black);
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+#main-menu h1 {
+	font-size: 3rem;
+	margin-bottom: 2rem;
+	color: var(--primary-yellow);
+	text-shadow: 0px 0px 6px rgba(255, 255, 255, 0.7);
+}
+#main-menu button {
+	font-family: 'Play', sans-serif;
+	background: var(--primary-gray);
+	font-size: 20px;
+	font-weight: 700;
+	color: white;
+	border-radius: 7px;
+	box-shadow: 0 7px 0px var(--primary-dark-gray);
+	display: inline-block;
+	transition: all 0.2s;
+	position: relative;
+	position: relative;
+	top: 0;
+	cursor: pointer;
+	margin: 0 20px;
+	border: none;
+	width: 200px;
+	height: 50px;
+	margin-bottom: 25px;
+}
+#main-menu button:hover {
+	background-color: var(--primary-light-gray);
+}
+#main-menu button:active {
+	top: 3px;
+	box-shadow: 0 2px 0px #387796;
+	transition: all 0.2s;
+}
+
+/* ---------------------------------------- */
+/* End Main Menu */
+/* ---------------------------------------- */
+
+/* ---------------------------------------- */
+/* Tower Stats */
+/* ---------------------------------------- */
+#tower-stats {
+	position: fixed;
+	top: 50%;
+	left: 1rem;
+	transform: translateY(-50%);
+	background-color: var(--primary-white);
+	padding: 1rem;
+	border-radius: 10px;
+	display: none;
+}
+#tower-stats h3 {
+	border-bottom: 2px solid #1f1f1f;
+	letter-spacing: 3px;
+	margin: 0 1rem;
+	margin-bottom: 1rem;
+}
+#tower-stats span {
+	margin-bottom: 0.8rem;
+	display: inline-block;
+}
+#tower-stats p {
+	cursor: pointer;
+}
+/* ---------------------------------------- */
+/* End Tower Stats */
+/* ---------------------------------------- */
+
+/* ---------------------------------------- */
+/* Game Bar */
+/* ---------------------------------------- */
+#game-bar {
+	position: absolute;
+	width: 100%;
+	top: -100px;
+	right: 0;
+	height: 50px;
+	display: flex;
+	justify-content: end;
+	align-items: flex-end;
+	display: none;
+}
+#game-bar button {
+	height: 3rem;
+	padding: 0 1rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	background-color: transparent;
+	border: none;
+	color: var(--primary-white);
+	cursor: pointer;
+	font-size: 1.5rem;
+	font-weight: 700;
+}
+#game-bar button:hover {
+	color: var(--primary-light-gray);
+}
+/* ---------------------------------------- */
+/* End Game Bar */
+/* ---------------------------------------- */
+
+/* ---------------------------------------- */
+/* Game Stats */
+/* ---------------------------------------- */
+#game-stats-bar {
+	position: absolute;
+	top: -50px;
+	width: 100%;
+	height: 50px;
+	/* background-color: #f1f1f1; */
+	display: flex;
+	align-items: center;
+	font-size: 1.3rem;
+	padding: 0 1rem;
+	background-color: #cfcfcf;
+	color: var(--primary-white);
+	display: none;
+}
+.bi-heart-fill {
+	color: var(--primary-red);
+}
+.bi-cash {
+	color: var(--primary-green);
+}
+.score {
+	margin-right: 1rem;
+}
+.score:last-of-type {
+	margin-left: auto;
+	margin-right: 0;
+}
+.score .tooltiptext {
+	bottom: 150%;
+}
+.score .text {
+	min-width: 3rem;
+	display: inline-block;
+}
+/* ---------------------------------------- */
+/* End Game Stats */
+/* ---------------------------------------- */
+
+/* ---------------------------------------- */
+/* Tower Buttons */
+/* ---------------------------------------- */
+#towers {
+	position: absolute;
+	bottom: -100px;
+	display: grid;
+	width: 100%;
+	grid-template-columns: repeat(4, 1fr);
+	display: none;
+}
+.tower {
+	height: 50px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0 1rem;
+	background-color: var(--primary-dark-gray);
+	color: var(--primary-white);
+	font-size: 1.2rem;
+	cursor: pointer;
+	position: relative;
+	border: 1px solid var(--primary-black);
+}
+.tower:hover {
+	background-color: var(--primary-gray);
+	color: var(--primary-white);
+}
+.tower.is-locked::after {
+	content: '\F39F';
+	font-family: 'bootstrap-icons';
+	font-size: 1.7rem;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	inset: 0;
+	background-color: #8d8d8da1;
+	color: var(--primary-yellow);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.tower.is-locked:hover {
+	cursor: default;
+	background-color: var(--primary-dark-gray);
+	color: var(--primary-white);
+}
+
+/* ---------------------------------------- */
+/* End Tower Buttons */
+/* ---------------------------------------- */

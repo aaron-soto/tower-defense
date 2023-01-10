@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Tower Defense</title>
+
+		<!-- GOOGLE FONTS -->
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap"
+			rel="stylesheet"
+		/>
+
+		<!-- Bootstrap Icons -->
+		<link
+			rel="stylesheet"
+			href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+		/>
+
+		<link rel="stylesheet" href="./css/style.css" />
+	</head>
+	<body>
+		<div class="container">
+			<canvas></canvas>
+			<div id="main-menu">
+				<h1>Geometry Turret Defense</h1>
+				<button id="play-btn">Play</button>
+				<button>Settings</button>
+			</div>
+			<div id="tower-stats">
+				<h3>Tower Info</h3>
+				<h4>Type</h4>
+				<span id="tower-name">Laser</span>
+				<h4>Range</h4>
+				<span id="tower-range">2</span>
+				<h4>Damage</h4>
+				<span id="tower-damage">15</span>
+				<h4>Firing Rate</h4>
+				<span id="tower-firing-rate">300</span>
+				<p>Sell $<span>10</span></p>
+				<p>Upgrade $<span>20</span></p>
+			</div>
+			<div id="game-bar">
+				<button id="pause-btn">Pause</button>
+				<button id="screenshot-btn" class="tooltip">
+					<span class="tooltiptext">Screenshot</span>
+					<i class="bi bi-camera"></i>
+				</button>
+				<button id="help-btn" class="tooltip">
+					<span class="tooltiptext">Help</span>
+					<i class="bi bi-info-circle"></i>
+				</button>
+			</div>
+			<div id="game-stats-bar">
+				<div class="score tooltip">
+					<span class="tooltiptext">Health</span>
+					<i class="bi bi-heart-fill"></i>
+					<span class="text">100</span>
+				</div>
+				<div class="score tooltip">
+					<span class="tooltiptext">Cash</span>
+					<span>$</span>
+					<span class="text" id="cash">0</span>
+				</div>
+				<div class="score tooltip">
+					<span class="tooltiptext">Wave</span>
+					<i class="bi bi-shield-shaded"></i>
+					<span class="text" id="wave">1</span>
+				</div>
+				<div class="score tooltip">
+					<span class="tooltiptext">Score</span>
+					<i class="bi bi-trophy-fill"></i>
+					<span class="text">0</span>
+				</div>
+				<div class="score tooltip">
+					<span class="tooltiptext">Kills</span>
+					<i class="bi bi-award-fill"></i>
+					<span class="text">0</span>
+				</div>
+				<div class="score tooltip">
+					<span class="tooltiptext">Time Remaining</span>
+					<i class="bi bi-clock-fill"></i>
+					<span class="text" id="time">60</span>
+				</div>
+			</div>
+			<div id="towers">
+				<div class="tower" id="buy-laser">
+					<span>Laser</span>
+					<span>$<span id="cost-laser">0</span></span>
+				</div>
+				<div class="tower" id="buy-sniper">
+					<span>Sniper</span>
+					<span>$<span id="cost-sniper">0</span></span>
+				</div>
+				<div class="tower" id="buy-gatlin">
+					<span>Gatlin</span>
+					<span>$<span id="cost-gatlin">0</span></span>
+				</div>
+				<div class="tower is-locked" id="buy-tesla">
+					<!-- <span class="lock-overlay"><i class="bi bi-file-lock2"></i></span> -->
+					<span>Tesla</span>
+					<span>$<span id="cost-tesla">0</span></span>
+				</div>
+				<div class="tower" id="buy-cannon">
+					<span>Cannon</span>
+					<span>$<span id="cost-cannon">0</span></span>
+				</div>
+				<div class="tower" id="buy-missile">
+					<span>Missile</span>
+					<span>$<span id="cost-missile">0</span></span>
+				</div>
+				<div class="tower" id="buy-bomb">
+					<span>Bomb</span>
+					<span>$<span id="cost-bomb">0</span></span>
+				</div>
+				<div class="tower" id="buy-nuke">
+					<span>Nuke</span>
+					<span>$<span id="cost-nuke">0</span></span>
+				</div>
+			</div>
+		</div>
+		<script src="./js/index.js"></script>
+		<script src="./js/Utils.js"></script>
+		<script src="./js/EventListeners.js"></script>
+	</body>
+</html>
