@@ -23,6 +23,7 @@ const towerFiringRateEl = document.getElementById('tower-firing-rate');
 const timeEl = document.getElementById('time');
 const cashEl = document.getElementById('cash');
 const waveEl = document.getElementById('wave');
+const healthEl = document.getElementById('health');
 
 const dpi = window.devicePixelRatio;
 const cellSize = 50;
@@ -35,6 +36,7 @@ let startRowBase = Math.floor(Math.random() * rows + 1);
 let wave = 1;
 
 // User variables
+let health = 100;
 let waveTime = 30;
 let roundTime = 30;
 let cash = 300;
@@ -150,7 +152,8 @@ class Enemy {
 	constructor() {
 		this.x = 0 + cellSize / 2;
 		this.y = startRowEnemies * cellSize - cellSize / 2;
-		this.speed = 0.75;
+		this.speed = 1.5;
+		// this.speed = 0.75;
 	}
 
 	draw() {
@@ -177,6 +180,17 @@ class Enemy {
 
 		this.x = this.x + velocity.x;
 		this.y = this.y + velocity.y;
+
+		if (
+			this.x >= cols * cellSize - cellSize &&
+			this.y >= startRowBase * cellSize - cellSize
+		) {
+			enemies.shift();
+			health -= 5;
+			healthEl.innerText = health;
+			updateTextFields();
+			console.log('hit');
+		}
 	}
 }
 
