@@ -4,12 +4,22 @@
 
 I have always enjoyed creating games with JavaScript. Since I have gotten more experience with JavaScript I figured it was a good time to create a new project showcasing my skills I have learned over the years. Throughout this project I have learned better ways manage JavaScript canvas animation loops and user interactions.
 
+![game screenshot](./images/Screenshot.png)
+
+---
+
 ## Table of Contents
 
+- [Links](#links)
 - [Usage](#usage)
 - [Credits](#credits)
 - [Badges](#badges)
 - [How to Contribute](#How_to_contribute)
+
+## Links
+
+- [Demo Link](https://aaron-soto.github.io/tower-defense/)
+- [Code Link](https://github.com/aaron-soto/tower-defense)
 
 ## Usage
 
